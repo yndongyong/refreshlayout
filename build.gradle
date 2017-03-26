@@ -1,6 +1,6 @@
 if (isModule.toBoolean()) {
     apply plugin: 'com.android.application'
-}else{
+} else {
     apply plugin: 'com.android.library'
 }
 
@@ -10,7 +10,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        if (isModule.toBoolean()){
+        if (isModule.toBoolean()) {
             applicationId rootProject.ext.applicationId
         }
         minSdkVersion rootProject.ext.minSdkVersion
@@ -21,14 +21,14 @@ android {
         applicationIdSuffix ".refresh"
 
     }
-    sourceSets{
+    sourceSets {
         main {
             if (isModule.toBoolean()) {
-                manifest.srcFile  'src/main/debug/AndroidManifest.xml'
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             } else {
-                manifest.srcFile  'src/main/release/AndroidManifest.xml'
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
                 //排除debug文件夹下的所有Java文件
-                java{
+                java {
                     exclude 'debug/**'
                 }
             }
@@ -43,7 +43,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
+    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
 }
