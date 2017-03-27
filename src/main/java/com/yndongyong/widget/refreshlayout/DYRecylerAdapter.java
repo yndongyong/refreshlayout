@@ -44,6 +44,7 @@ public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerV
     public static final int STATUS_LOADING_ERROR = 1;
     public static final int STATUS_NO_MORE = 2;
     public static final int STATUS_INVALID_NETWORK = 3;
+    public static final int STATUS_LOAD_MORE = 4;
 
 
     //adapter 当前的类型 控制是是否有header或者footer;
@@ -94,7 +95,14 @@ public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerV
     public void setStatus(int status, boolean isUpdate) {
         this.mStatus = status;
         if (isUpdate) {
-            notifyItemChanged(getItemCount() - 1);
+
+            //Cannot call this method in a scroll callback. Scroll callbacks mightbe run during a measure & layout
+            // pass where you cannot change theRecyclerView data.
+            // Any method call that might change the structureof the RecyclerView or
+            // the adapter contents should be postponed tothe next frame.
+            // TODO: 2017/3/27  如果不注释 下面的代码会报如上的错误信息
+//            int position = getItemCount() - 1;
+//            notifyItemChanged(position);
         }
 
     }
@@ -143,6 +151,10 @@ public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerV
                     case STATUS_LOADING:
                         footerHolder.pbProgress.setVisibility(View.VISIBLE);
                         footerHolder.tvTips.setText("正在加载...");
+                        break;
+                    case STATUS_LOAD_MORE:
+                        footerHolder.pbProgress.setVisibility(View.VISIBLE);
+                        footerHolder.tvTips.setText("正在加载更多");
                         break;
                     case STATUS_LOADING_ERROR:
                         footerHolder.pbProgress.setVisibility(View.GONE);
@@ -251,15 +263,16 @@ public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerV
         if (list != null && list.size() > 0) {
             mData.clear();
             mData.addAll(list);
-            notifyItemRangeChanged(mData.size(), list.size());
+//            notifyItemRangeChanged(mData.size(), list.size());
+            notifyDataSetChanged();
         }
     }
 
     public void addMoreData(List<T> list) {
         if (list != null && list.size() > 0) {
-//            int offset = mData.size();
+            int offset = mData.size();
             mData.addAll(list);
-            notifyItemRangeInserted(mData.size(), list.size());
+            notifyItemRangeInserted(offset, list.size());
         }
     }
 
