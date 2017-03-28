@@ -3,7 +3,6 @@ package debug;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -15,7 +14,7 @@ import com.yndongyong.widget.refreshlayout.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrideLayoutTestActivity extends AppCompatActivity implements DYSwipeRefreshLayout.DYSwipeRefreshLayoutListener {
+public class GridLayoutTestActivity extends AppCompatActivity implements DYSwipeRefreshLayout.DYSwipeRefreshLayoutListener {
 
     DYSwipeRefreshLayout refreshLayout;
     RecyclerView recyclerView;
@@ -48,7 +47,7 @@ public class GrideLayoutTestActivity extends AppCompatActivity implements DYSwip
         recyclerView.addOnItemTouchListener(new DYOnRecyclerItemClickListener(recyclerView) {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(GrideLayoutTestActivity.this, "click position:" + position, Toast.LENGTH_LONG).show();
+                Toast.makeText(GridLayoutTestActivity.this, "click position:" + position, Toast.LENGTH_LONG).show();
 
             }
 
@@ -75,7 +74,7 @@ public class GrideLayoutTestActivity extends AppCompatActivity implements DYSwip
         recyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(GrideLayoutTestActivity.this, "刷新完成 offset:" + offset, Toast.LENGTH_LONG).show();
+                Toast.makeText(GridLayoutTestActivity.this, "刷新完成 offset:" + offset, Toast.LENGTH_LONG).show();
                 refreshLayout.onComplete();
                 mData = fakeData();
 
@@ -97,7 +96,7 @@ public class GrideLayoutTestActivity extends AppCompatActivity implements DYSwip
             @Override
             public void run() {
                 refreshLayout.onComplete();
-                Toast.makeText(GrideLayoutTestActivity.this, "加载完成 offset:" + offset, Toast.LENGTH_LONG).show();
+                Toast.makeText(GridLayoutTestActivity.this, "加载完成 offset:" + offset, Toast.LENGTH_LONG).show();
                 List<String> list = fakeData();
                 mData.addAll(list);
                 //所以需要先更改footer的状态，再去改变adapter的data
