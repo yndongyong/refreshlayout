@@ -17,7 +17,7 @@ import java.util.List;
  * Created by dongzhiyong on 2017/3/24.
  */
 
-public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class DYRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     protected List<T> mData = new ArrayList<>();
     protected Context mContext;
@@ -53,7 +53,7 @@ public abstract class DYRecylerAdapter<T> extends RecyclerView.Adapter<RecyclerV
     private int mStatus;
 
 
-    public DYRecylerAdapter(Context _context, int model) {
+    public DYRecyclerAdapter(Context _context, int model) {
         this.mContext = _context;
         this.mModel = model;
         this.mStatus = STATUS_HIDE;

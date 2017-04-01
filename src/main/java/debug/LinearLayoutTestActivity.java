@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.yndongyong.widget.refreshlayout.DYOnRecyclerItemClickListener;
-import com.yndongyong.widget.refreshlayout.DYRecylerAdapter;
+import com.yndongyong.widget.refreshlayout.DYRecyclerAdapter;
 import com.yndongyong.widget.refreshlayout.DYSwipeRefreshLayout;
 import com.yndongyong.widget.refreshlayout.R;
 
@@ -33,7 +33,7 @@ public class LinearLayoutTestActivity extends AppCompatActivity implements DYSwi
         refreshLayout.setLoadMoreEnable(loadMoreEnable);
 //        refreshLayout.setLoadMoreEnable(false);当refreshlayout处于不可以加载更多的时候，
 //        不能设置adapter包含footer，不然会显示一个空行
-        mAdapter = new MyAdapter(this, DYRecylerAdapter.MODEL_FOOTER);
+        mAdapter = new MyAdapter(this, DYRecyclerAdapter.MODEL_FOOTER);
         mData = fakeData();
         mAdapter.addNewData(mData);
 
@@ -76,7 +76,7 @@ public class LinearLayoutTestActivity extends AppCompatActivity implements DYSwi
                 Toast.makeText(LinearLayoutTestActivity.this, "刷新完成 offset:" + offset, Toast.LENGTH_LONG).show();
                 refreshLayout.onComplete();
                 mData = fakeData();
-                mAdapter.setStatus(DYRecylerAdapter.STATUS_LOAD_MORE, false);
+                mAdapter.setStatus(DYRecyclerAdapter.STATUS_LOAD_MORE, false);
                 mAdapter.addNewData(mData);
                 offset++;
 
@@ -87,7 +87,7 @@ public class LinearLayoutTestActivity extends AppCompatActivity implements DYSwi
 
     @Override
     public void onLoadMore() {
-        mAdapter.setStatus(DYRecylerAdapter.STATUS_LOADING, true);
+        mAdapter.setStatus(DYRecyclerAdapter.STATUS_LOADING, true);
         recyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +96,7 @@ public class LinearLayoutTestActivity extends AppCompatActivity implements DYSwi
                 List<String> list = fakeData();
                 mData.addAll(list);
                 if (offset == 3) {
-                    mAdapter.setStatus(DYRecylerAdapter.STATUS_NO_MORE, true);
+                    mAdapter.setStatus(DYRecyclerAdapter.STATUS_NO_MORE, true);
                     refreshLayout.setLoadMoreEnable(false);
                 }
                 mAdapter.addMoreData(list);

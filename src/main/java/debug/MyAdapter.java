@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.yndongyong.widget.refreshlayout.DYRecylerAdapter;
+import com.yndongyong.widget.refreshlayout.DYRecyclerAdapter;
 import com.yndongyong.widget.refreshlayout.R;
 
 /**
  * Created by dongzhiyong on 2017/3/26.
  */
 
-public class MyAdapter extends DYRecylerAdapter<String> {
+public class MyAdapter extends DYRecyclerAdapter<String> {
 
     public MyAdapter(Context _context, int model) {
         super(_context, model);
